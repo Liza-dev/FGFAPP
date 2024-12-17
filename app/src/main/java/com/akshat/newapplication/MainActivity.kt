@@ -23,9 +23,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            NewApplicationTheme {
                 MyApp()
-            }
         }
     }
 }
@@ -34,17 +32,12 @@ class MainActivity : ComponentActivity() {
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
-    NewApplicationTheme {
         MyApp()
-    }
 }
 
 @Composable
-fun MyApp(){
-    Scaffold(modifier = Modifier.fillMaxSize()) { it ->
-        Surface(modifier = Modifier.padding(top = it.calculateTopPadding())) {
-            SampleNavigation()
-        }
-
+fun MyApp() {
+    NewApplicationTheme {
+        SampleNavigation()
     }
 }
