@@ -27,6 +27,8 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -64,30 +66,46 @@ fun PostsScreen(
                 .padding(top = it.calculateTopPadding())
                 .fillMaxSize()
         ) {
-            val posts by postsViewModel.posts.collectAsStateWithLifecycle()
+            val isConnected by postsViewModel.isConnected.collectAsState(initial = false)
+            var showData by remember { mutableStateOf(false) }
 
-            when (posts) {
-                is Resource.Loading -> {
-                    Text(text = "Loading...", textAlign = TextAlign.Center)
+
+            LaunchedEffect(isConnected) {
+                if (isConnected) {
+                    showData = true
                 }
+            }
 
-                is Resource.Success -> {
-                    LazyColumn {
-                        posts.data?.data?.children?.let { it ->
-                            items(items = it) { children ->
-                                var imageUrl = children.data.thumbnail/*if (imageUrl != "self") {
+            if (showData) {
+                val posts by postsViewModel.posts.collectAsStateWithLifecycle()
+                when (posts) {
+                    is Resource.Loading -> {
+                        Text(text = "Loading...", fontSize = 15.sp, textAlign = TextAlign.Center)
+                    }
 
-                                }*/
-                                PostRow(children.data)
+                    is Resource.Success -> {
+                        LazyColumn {
+                            posts.data?.data?.children?.let { it ->
+                                items(items = it) { children ->
+                                    PostRow(children.data)
+                                }
                             }
                         }
                     }
+
+                    is Resource.Error -> {
+                        Text(
+                            text = posts.message.toString(),
+                            fontSize = 15.sp,
+                            textAlign = TextAlign.Center
+                        )
+                    }
                 }
 
-                is Resource.Error -> {
-                    Text(text = posts.message.toString(), textAlign = TextAlign.Center)
-                }
 
+            }
+            else{
+                Text(text = "No Internet Connection", fontSize = 15.sp, textAlign = TextAlign.Center)
             }
         }
     }
