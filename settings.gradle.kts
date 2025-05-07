@@ -19,6 +19,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "NewApplication"
+rootProject.name = "fgfandroidapp"
 include(":app")
  

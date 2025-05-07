@@ -7,11 +7,11 @@ plugins {
 }
 
 android {
-    namespace = "com.akshat.newapplication"
+    namespace = "com.liza.fgfandroidapp"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.akshat.newapplication"
+        applicationId = "com.liza.fgfandroidapp"
         minSdk = 30
         targetSdk = 35
         versionCode = 1
@@ -73,4 +73,9 @@ dependencies {
     androidTestImplementation(libs.androidx.ui.test.junit4)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+    implementation(libs.accompanist.swiperefresh)
+    // Paging 3
+    implementation(libs.androidx.paging.runtime.ktx)
+    implementation(libs.androidx.paging.compose)
+
 }
