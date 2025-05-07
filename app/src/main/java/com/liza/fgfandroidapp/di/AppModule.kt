@@ -4,7 +4,7 @@ import android.content.Context
 import com.liza.fgfandroidapp.network.CheckInternetConnectivity
 import com.liza.fgfandroidapp.network.NetworkAPI
 import com.liza.fgfandroidapp.network.ApiServices
-import com.liza.fgfandroidapp.repository.NetworkRepository
+import com.liza.fgfandroidapp.repository.NetworksRepository
 import com.liza.fgfandroidapp.util.BASE_URL
 import dagger.Module
 import dagger.Provides
@@ -30,12 +30,12 @@ class AppModule {
     @Provides
     @Singleton
     fun provideNetworkRepository(@ApplicationContext context: Context): NetworkAPI {
-        return NetworkRepository(context)
+        return NetworksRepository(context)
     }
 
     @Provides
     @Singleton
-    fun provideCheckInternetConnectivityUseCase(networkRepository: NetworkRepository): CheckInternetConnectivity {
+    fun provideCheckInternetConnectivityUseCase(networkRepository: NetworksRepository): CheckInternetConnectivity {
         return CheckInternetConnectivity(networkRepository)
     }
 

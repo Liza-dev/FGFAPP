@@ -19,7 +19,6 @@ interface ApiServices {
         @Query("pageSize") pageSize: Int
     ): List<PostDto>
 
-
     @POST("posts/{postId}/like")
     suspend fun likePost(@Path("postId") postId: String): retrofit2.Response<Unit>
 
@@ -27,5 +26,8 @@ interface ApiServices {
     suspend fun unlikePost(@Path("postId") postId: String): retrofit2.Response<Unit>
 
     @POST("posts/{id}/comment")
-    suspend fun commentOnPost(@Path("id") id: String, @Body comment: String): retrofit2.Response<Unit>
+    suspend fun commentOnPost(
+        @Path("id") id: String,
+        @Body comment: String
+    ): retrofit2.Response<Unit>
 }

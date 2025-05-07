@@ -7,7 +7,7 @@ import com.liza.fgfandroidapp.network.NetworkAPI
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
-class NetworkRepository @Inject constructor(
+class NetworksRepository @Inject constructor(
     @ApplicationContext private val context: Context
 ) : NetworkAPI {
     override fun isInternetAvailable(): Boolean {

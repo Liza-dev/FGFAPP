@@ -9,7 +9,7 @@ import com.liza.fgfandroidapp.sceens.PostsScreen
 import com.liza.fgfandroidapp.sceens.PostsViewModel
 
 @Composable
-fun FGFNavigation(){
+fun FGFNavigation() {
     val navController = rememberNavController()
     NavHost(
         navController = navController,
@@ -20,8 +20,6 @@ fun FGFNavigation(){
             val postsViewModel = hiltViewModel<PostsViewModel>()
             PostsScreen(navController = navController, postsViewModel = postsViewModel)
         }
-
-
 
     }
 
